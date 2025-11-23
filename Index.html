@@ -6,309 +6,52 @@
     <title>LyricGenius</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000;
-            color: #fff;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-        
-        .container {
-            max-width: 100%;
-            padding: 10px;
-        }
-        
-        .header {
-            text-align: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #333;
-        }
-        
-        .header h1 {
-            font-size: 1.8em;
-            color: #FFD700;
-            margin-bottom: 5px;
-        }
-        
-        .nav {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
-            overflow-x: auto;
-            gap: 15px;
-        }
-        
-        .nav-link {
-            color: #00CED1;
-            text-decoration: none;
-            font-size: 14px;
-            white-space: nowrap;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            background: #1a1a1a;
-            color: #FFD700;
-        }
-        
-        .section {
-            display: none;
-            padding: 10px 0;
-        }
-        
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #000; color: #fff; font-size: 14px; line-height: 1.4; }
+        .container { max-width: 100%; padding: 10px; }
+        .header { text-align: center; padding: 15px 0; border-bottom: 1px solid #333; }
+        .header h1 { font-size: 1.8em; color: #FFD700; margin-bottom: 5px; }
+        .nav { display: flex; justify-content: space-around; padding: 10px 0; border-bottom: 1px solid #333; overflow-x: auto; gap: 15px; }
+        .nav-link { color: #00CED1; text-decoration: none; font-size: 14px; white-space: nowrap; padding: 5px 10px; border-radius: 4px; transition: background 0.2s; }
+        .nav-link:hover, .nav-link.active { background: #1a1a1a; color: #FFD700; }
+        .section { display: none; padding: 10px 0; }
         .section.active { display: block; }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin: 15px 0;
-        }
-        
-        .stat-box {
-            background: #1a1a1a;
-            padding: 12px;
-            border-radius: 6px;
-            border-left: 3px solid #00CED1;
-        }
-        
-        .stat-number {
-            font-size: 2em;
-            color: #FFD700;
-            font-weight: bold;
-        }
-        
-        .stat-label {
-            font-size: 0.85em;
-            color: #888;
-            margin-top: 4px;
-        }
-        
-        .form-group {
-            margin-bottom: 12px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 4px;
-            color: #00CED1;
-            font-size: 0.9em;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 14px;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #00CED1;
-        }
-        
-        textarea {
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            resize: vertical;
-        }
-        
+        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 15px 0; }
+        .stat-box { background: #1a1a1a; padding: 12px; border-radius: 6px; border-left: 3px solid #00CED1; cursor: pointer; }
+        .stat-number { font-size: 2em; color: #FFD700; font-weight: bold; }
+        .stat-label { font-size: 0.85em; color: #888; margin-top: 4px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; color: #00CED1; font-size: 0.9em; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 8px; background: #1a1a1a; border: 1px solid #333; border-radius: 4px; color: #fff; font-size: 14px; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #00CED1; }
+        textarea { font-family: 'Courier New', monospace; line-height: 1.5; resize: vertical; }
         .lyrics-editor { min-height: 300px; }
-        
-        .btn {
-            background: #00CED1;
-            color: #000;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 4px;
-            font-size: 13px;
-            cursor: pointer;
-            margin: 3px;
-            font-weight: 600;
-        }
-        
+        .btn { background: #00CED1; color: #000; border: none; padding: 8px 14px; border-radius: 4px; font-size: 13px; cursor: pointer; margin: 3px; font-weight: 600; }
         .btn:active { transform: scale(0.98); }
-        
         .btn-yellow { background: #FFD700; color: #000; }
         .btn-red { background: #ff4444; color: #fff; }
         .btn-small { padding: 4px 8px; font-size: 12px; }
-        
-        .item {
-            background: #1a1a1a;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-            border-left: 2px solid #00CED1;
-        }
-        
-        .item-title {
-            color: #FFD700;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-        
-        .item-meta {
-            color: #888;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-        }
-        
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        
-        .tool-box {
-            background: #1a1a1a;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 12px 0;
-            border: 1px solid #333;
-        }
-        
-        .tool-box h3 {
-            color: #00CED1;
-            font-size: 1em;
-            margin-bottom: 10px;
-        }
-        
-        .rhyme-results {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
-        }
-        
-        .rhyme-word {
-            background: #00CED1;
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        
-        .style-item {
-            background: #0a0a0a;
-            padding: 8px;
-            margin: 6px 0;
-            border-radius: 4px;
-            border-left: 2px solid #FFD700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
+        .item { background: #1a1a1a; padding: 10px; margin-bottom: 8px; border-radius: 4px; border-left: 2px solid #00CED1; }
+        .item-title { color: #FFD700; font-weight: bold; font-size: 1.1em; margin-bottom: 5px; }
+        .item-meta { color: #888; font-size: 0.85em; margin-bottom: 8px; }
+        .tool-box { background: #1a1a1a; padding: 12px; border-radius: 6px; margin: 12px 0; border: 1px solid #333; }
+        .tool-box h3 { color: #00CED1; font-size: 1em; margin-bottom: 10px; }
+        .rhyme-results { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .rhyme-word { background: #00CED1; color: #000; padding: 4px 10px; border-radius: 12px; font-size: 12px; cursor: pointer; }
+        .style-item { background: #0a0a0a; padding: 8px; margin: 6px 0; border-radius: 4px; border-left: 2px solid #FFD700; display: flex; justify-content: space-between; align-items: center; }
         .style-name { color: #FFD700; font-weight: bold; font-size: 0.95em; }
         .style-desc { color: #aaa; font-size: 0.8em; margin-top: 3px; }
-        
-        .current-style {
-            background: #1a3a1a;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border-left: 3px solid #4caf50;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            overflow-y: auto;
-        }
-        
-        .modal-content {
-            background: #1a1a1a;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 95%;
-            max-width: 600px;
-            border: 1px solid #333;
-        }
-        
-        .close {
-            color: #888;
-            float: right;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .close:hover { color: #FFD700; }
-        
-        .db-status {
-            background: #1a1a1a;
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border-left: 3px solid #00CED1;
-            font-size: 0.85em;
-        }
-        
-        .import-box {
-            background: #1a3333;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border: 2px dashed #00CED1;
-        }
-        
-        .import-help {
-            color: #888;
-            font-size: 0.8em;
-            margin: 8px 0;
-            line-height: 1.4;
-        }
-        
-        .progress {
-            background: #333;
-            height: 6px;
-            border-radius: 3px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            background: #00CED1;
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s;
-        }
-        
-        input[type="file"] { color: #00CED1; }
-        
-        @media (min-width: 768px) {
-            .container { max-width: 800px; margin: 0 auto; padding: 15px; }
-            .stats { grid-template-columns: repeat(4, 1fr); }
-        }
+        .current-style { background: #1a3a1a; padding: 10px; border-radius: 4px; margin: 10px 0; border-left: 3px solid #4caf50; }
+        .db-status { background: #1a1a1a; padding: 8px 12px; border-radius: 4px; margin: 10px 0; border-left: 3px solid #00CED1; font-size: 0.85em; }
+        .import-box { background: #1a3333; padding: 15px; border-radius: 6px; margin: 15px 0; border: 2px dashed #00CED1; }
+        .import-help { color: #888; font-size: 0.8em; margin: 8px 0; line-height: 1.4; }
+        .progress { background: #333; height: 6px; border-radius: 3px; margin: 10px 0; overflow: hidden; }
+        .progress-bar { background: #00CED1; height: 100%; width: 0%; transition: width 0.3s; }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 15px; } .stats { grid-template-columns: repeat(4, 1fr); } }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🎶 LyricGenius</h1>
-        </div>
-
+        <div class="header"><h1>🎶 LyricGenius</h1></div>
         <div class="nav">
             <a href="#" class="nav-link active" onclick="showSection('dashboard', event)">Dashboard</a>
             <a href="#" class="nav-link" onclick="showSection('editor', event)">Editor</a>
@@ -317,690 +60,142 @@
             <a href="#" class="nav-link" onclick="showSection('import', event)">Import</a>
             <a href="#" class="nav-link" onclick="showSection('export', event)">Export</a>
         </div>
-
-        <!-- Dashboard -->
         <div id="dashboard" class="section active">
-            <div class="db-status">
-                <strong>💾 Database:</strong> <span id="dbStatusText">Loading...</span>
-            </div>
-            
+            <div class="db-status"><strong>💾 Database:</strong> <span id="dbStatusText">Loading...</span></div>
             <div class="stats">
-                <div class="stat-box" onclick="showSection('library', event)">
-                    <div class="stat-number" id="totalLyrics">0</div>
-                    <div class="stat-label">Total Lyrics</div>
-                </div>
-                <div class="stat-box" onclick="filterLibrary('in-progress')">
-                    <div class="stat-number" id="unfinishedLyrics">0</div>
-                    <div class="stat-label">In Progress</div>
-                </div>
-                <div class="stat-box" onclick="filterLibrary('complete')">
-                    <div class="stat-number" id="completedLyrics">0</div>
-                    <div class="stat-label">Complete</div>
-                </div>
-                <div class="stat-box" onclick="showSection('styles', event)">
-                    <div class="stat-number" id="totalStyles">0</div>
-                    <div class="stat-label">Styles</div>
-                </div>
+                <div class="stat-box" onclick="showSection('library', event)"><div class="stat-number" id="totalLyrics">0</div><div class="stat-label">Total</div></div>
+                <div class="stat-box"><div class="stat-number" id="unfinishedLyrics">0</div><div class="stat-label">Progress</div></div>
+                <div class="stat-box"><div class="stat-number" id="completedLyrics">0</div><div class="stat-label">Complete</div></div>
+                <div class="stat-box" onclick="showSection('styles', event)"><div class="stat-number" id="totalStyles">0</div><div class="stat-label">Styles</div></div>
             </div>
-            
             <div style="text-align: center; margin-top: 20px;">
-                <button class="btn btn-yellow" onclick="showSection('editor', event)">✍️ New Lyric</button>
-                <button class="btn btn-yellow" onclick="showSection('import', event)">📥 Bulk Import</button>
-                <button class="btn" onclick="exportAllData('txt')">📄 Export All</button>
+                <button class="btn btn-yellow" onclick="showSection('editor', event)">✍️ New</button>
+                <button class="btn btn-yellow" onclick="showSection('import', event)">📥 Import</button>
+                <button class="btn" onclick="exportAllData('txt')">📄 Export</button>
             </div>
         </div>
-
-        <!-- Editor -->
         <div id="editor" class="section">
             <h2 style="color: #FFD700; margin-bottom: 15px;">📝 Editor</h2>
-            
             <div class="tool-box" style="border-color: #4caf50;">
-                <h3 style="color: #4caf50;">🎨 Style Preset</h3>
-                <select id="styleSelect" onchange="applyStyleToEditor()">
-                    <option value="">No Style</option>
-                </select>
+                <h3 style="color: #4caf50;">🎨 Style</h3>
+                <select id="styleSelect" onchange="applyStyleToEditor()"><option value="">No Style</option></select>
                 <div id="currentStyleDisplay"></div>
             </div>
-            
-            <div class="form-group">
-                <label>Title *</label>
-                <input type="text" id="songTitle" placeholder="Song title...">
-            </div>
-            
+            <div class="form-group"><label>Title *</label><input type="text" id="songTitle" placeholder="Song title..."></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <div class="form-group">
-                    <label>Artist</label>
-                    <input type="text" id="songArtist" placeholder="Artist...">
-                </div>
-                <div class="form-group">
-                    <label>Producer</label>
-                    <input type="text" id="songProducer" placeholder="Producer...">
-                </div>
+                <div class="form-group"><label>Artist</label><input type="text" id="songArtist"></div>
+                <div class="form-group"><label>Producer</label><input type="text" id="songProducer"></div>
             </div>
-            
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
-                <div class="form-group">
-                    <label>Genre</label>
-                    <select id="songGenre">
-                        <option value="">Select...</option>
-                        <option value="Hip Hop">Hip Hop</option>
-                        <option value="Pop">Pop</option>
-                        <option value="R&B">R&B</option>
-                        <option value="Rock">Rock</option>
-                        <option value="Electronic">Electronic</option>
-                        <option value="Country">Country</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Mood</label>
-                    <input type="text" id="songMood" placeholder="Mood...">
-                </div>
-                <div class="form-group">
-                    <label>BPM</label>
-                    <input type="number" id="songBPM" placeholder="120">
-                </div>
+                <div class="form-group"><label>Genre</label><select id="songGenre"><option value="">Select...</option><option value="Hip Hop">Hip Hop</option><option value="Pop">Pop</option><option value="R&B">R&B</option><option value="Rock">Rock</option></select></div>
+                <div class="form-group"><label>Mood</label><input type="text" id="songMood"></div>
+                <div class="form-group"><label>BPM</label><input type="number" id="songBPM"></div>
             </div>
-
             <div class="tool-box">
-                <h3>🎙️ Voice</h3>
-                <button class="btn btn-small" onclick="startDictation()">🎤 Dictate</button>
-                <button class="btn btn-red btn-small" onclick="toggleRecording()" id="recordBtn">⏺️ Record</button>
-                <div id="recordingStatus" style="display:none; margin-top:8px; color:#ff4444;">
-                    ● <span id="recordingTime">00:00</span>
-                </div>
-            </div>
-
-            <div class="tool-box">
-                <h3>🎵 Rhymes & Synonyms</h3>
-                <input type="text" id="rhymeInput" placeholder="Enter word..." style="margin-bottom: 8px;">
+                <h3>🎵 Rhymes</h3>
+                <input type="text" id="rhymeInput" placeholder="Word..." style="margin-bottom: 8px;">
                 <button class="btn btn-small" onclick="findRhymes()">Rhymes</button>
                 <button class="btn btn-small" onclick="findSynonyms()">Synonyms</button>
                 <div id="rhymeResults" class="rhyme-results"></div>
             </div>
-
-            <div class="form-group">
-                <label>Lyrics</label>
-                <textarea id="lyricsContent" class="lyrics-editor" placeholder="[Intro]
-
-[Verse 1]
-
-[Chorus]
-
-[Verse 2]
-
-[Chorus]
-
-[Bridge]
-
-[Outro]"></textarea>
-            </div>
-
-            <div class="tool-box" style="border-color: #FFD700;">
-                <h3 style="color: #FFD700;">📋 Quick Paste</h3>
-                <button class="btn btn-yellow" onclick="pasteFromClipboard()">📋 Paste from Clipboard</button>
-                <p style="color: #888; font-size: 0.8em; margin-top: 5px;">Copy from Apple Notes, then click this button</p>
-            </div>
-
+            <div class="form-group"><label>Lyrics</label><textarea id="lyricsContent" class="lyrics-editor"></textarea></div>
             <div style="text-align: center; margin-top: 15px;">
                 <button class="btn btn-yellow" onclick="saveLyrics('complete')">✅ Complete</button>
                 <button class="btn" onclick="saveLyrics('in-progress')">💾 Save</button>
                 <button class="btn" onclick="newLyric()">🆕 New</button>
-                <button class="btn btn-red" onclick="cleanLyrics()">🧹 Clean</button>
                 <button class="btn" onclick="copyToClipboard()">📋 Copy</button>
             </div>
         </div>
-
-        <!-- Library -->
         <div id="library" class="section">
             <h2 style="color: #FFD700; margin-bottom: 15px;">📚 Library</h2>
-            
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px;">
-                <input type="text" id="searchTitle" placeholder="Search title..." onkeyup="applyFilters()" style="width: 100%; padding: 6px; background: #1a1a1a; border: 1px solid #333; border-radius: 4px; color: #fff;">
-                <select id="statusFilter" onchange="applyFilters()" style="width: 100%; padding: 6px; background: #1a1a1a; border: 1px solid #333; border-radius: 4px; color: #fff;">
-                    <option value="">All Status</option>
-                    <option value="in-progress">In Progress</option>
+                <input type="text" id="searchTitle" placeholder="Search..." onkeyup="applyFilters()" style="width:100%; padding:6px; background:#1a1a1a; border:1px solid #333; border-radius:4px; color:#fff;">
+                <select id="statusFilter" onchange="applyFilters()" style="width:100%; padding:6px; background:#1a1a1a; border:1px solid #333; border-radius:4px; color:#fff;">
+                    <option value="">All</option>
+                    <option value="in-progress">Progress</option>
                     <option value="complete">Complete</option>
                 </select>
             </div>
-
-            <div class="tool-box" style="border-color: #ff4444;">
-                <h3 style="color: #ff4444;">🧹 Batch Clean</h3>
-                <select id="batchGenre" style="width: 100%; padding: 6px; background: #0a0a0a; border: 1px solid #333; border-radius: 4px; color: #fff; margin-bottom: 6px;">
-                    <option value="">All Genres</option>
-                    <option value="Hip Hop">Hip Hop</option>
-                    <option value="Pop">Pop</option>
-                    <option value="R&B">R&B</option>
-                </select>
-                <button class="btn btn-red btn-small" onclick="batchClean()">Clean Genre</button>
-                <button class="btn btn-red btn-small" onclick="batchCleanAll()">Clean ALL</button>
-            </div>
-
             <div id="lyricsList"></div>
         </div>
-
-        <!-- Styles -->
         <div id="styles" class="section">
-            <h2 style="color: #FFD700; margin-bottom: 15px;">🎨 Style Presets</h2>
-            
+            <h2 style="color: #FFD700; margin-bottom: 15px;">🎨 Styles</h2>
             <div class="tool-box" style="border-color: #4caf50;">
-                <h3 style="color: #4caf50;">➕ Create Style</h3>
-                <div class="form-group">
-                    <label>Name *</label>
-                    <input type="text" id="newStyleName" placeholder="MC 1, Trap Beat...">
-                </div>
-                <div class="form-group">
-                    <label>Description *</label>
-                    <textarea id="newStyleDescription" rows="3" placeholder="Hard Kicker, Rap, EDM, BPM 80, Female Vocal..."></textarea>
-                </div>
+                <h3 style="color: #4caf50;">➕ Create</h3>
+                <div class="form-group"><label>Name</label><input type="text" id="newStyleName" placeholder="MC 1..."></div>
+                <div class="form-group"><label>Description</label><textarea id="newStyleDescription" rows="3" placeholder="Hard Kicker, Rap, EDM..."></textarea></div>
                 <button class="btn btn-yellow" onclick="saveNewStyle()">💾 Save</button>
-                <button class="btn btn-small" onclick="clearStyleForm()">Clear</button>
             </div>
-
             <h3 style="color: #00CED1; margin: 15px 0 10px 0;">Your Styles (<span id="styleCount">0</span>)</h3>
-            <button class="btn" onclick="exportStylesAsTxt()">📄 Export Styles</button>
             <div id="stylesList"></div>
         </div>
-
-        <!-- Import -->
         <div id="import" class="section">
-            <h2 style="color: #FFD700; margin-bottom: 15px;">📥 Bulk Import</h2>
-            
+            <h2 style="color: #FFD700; margin-bottom: 15px;">📥 Import</h2>
             <div class="import-box">
-                <h3 style="color: #FFD700; margin-bottom: 10px;">📁 Multiple Files</h3>
-                <p class="import-help">✨ Just drag & drop or select all 800 .txt files!<br>
-                <strong>Titles auto-detected</strong> from filenames or first line.<br>
-                No formatting needed!</p>
-                <input type="file" id="bulkFiles" multiple accept=".txt" onchange="importMultipleFiles(this)">
-                <button class="btn btn-yellow" style="margin-top: 8px;" onclick="document.getElementById('bulkFiles').click()">Choose Files (Select All 800)</button>
+                <h3 style="color: #FFD700; margin-bottom: 10px;">📁 Files</h3>
+                <p class="import-help">Select all 800 .txt files - titles auto-detected!</p>
+                <input type="file" id="bulkFiles" multiple accept=".txt" onchange="importMultipleFiles(this)" style="display:none">
+                <button class="btn btn-yellow" onclick="document.getElementById('bulkFiles').click()">Choose Files</button>
             </div>
-
             <div class="import-box">
-                <h3 style="color: #FFD700; margin-bottom: 10px;">📄 Combined File</h3>
-                <p class="import-help">Upload one file with ALL lyrics.<br>
-                Auto-splits by blank lines OR by:<br>
-                <code style="color: #00CED1;">---TITLE: Song Name---</code><br>
-                (Optional - first line becomes title)</p>
-                <input type="file" id="combinedFile" accept=".txt" onchange="importCombinedFile(this)">
-                <button class="btn btn-yellow" style="margin-top: 8px;" onclick="document.getElementById('combinedFile').click()">Choose File</button>
+                <h3 style="color: #FFD700; margin-bottom: 10px;">📋 Paste</h3>
+                <textarea id="pasteArea" placeholder="Paste lyrics..." style="min-height:150px; width:100%; padding:10px; background:#0a0a0a; border:1px solid #00CED1; color:#fff; border-radius:4px;"></textarea>
+                <button class="btn btn-yellow" style="margin-top:8px;" onclick="importFromPaste()">📥 Import</button>
             </div>
-
-            <div class="import-box">
-                <h3 style="color: #FFD700; margin-bottom: 10px;">📋 Paste All</h3>
-                <p class="import-help">Paste multiple lyrics. Auto-splits by:<br>
-                • Blank lines (Apple Notes style)<br>
-                • <code style="color: #00CED1;">---TITLE: Song---</code> (optional)<br>
-                First line = title</p>
-                <textarea id="pasteArea" placeholder="Paste your lyrics here..." style="min-height: 150px; width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #00CED1; color: #fff; border-radius: 4px; font-family: monospace;"></textarea>
-                <button class="btn btn-yellow" style="margin-top: 8px;" onclick="importFromPaste()">📥 Import Pasted</button>
-            </div>
-
-            <div class="tool-box" style="border-color: #00CED1;">
-                <h3>ℹ️ Format Examples</h3>
-                <pre style="color: #888; font-size: 0.75em; line-height: 1.6; overflow-x: auto;">
-<span style="color: #00CED1;">---TITLE: My First Song---</span>
-[Verse 1]
-Lyrics here...
-
-<span style="color: #00CED1;">---TITLE: Second Song---</span>
-[Intro]
-More lyrics...</pre>
-            </div>
-
-            <div id="importProgress" style="display: none;">
-                <div class="progress">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                <p id="importStatus" style="color: #00CED1; text-align: center; margin-top: 8px;"></p>
+            <div id="importProgress" style="display:none;">
+                <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+                <p id="importStatus" style="color:#00CED1; text-align:center; margin-top:8px;"></p>
             </div>
         </div>
-
-        <!-- Export -->
         <div id="export" class="section">
             <h2 style="color: #FFD700; margin-bottom: 15px;">📤 Export</h2>
-            
             <div class="tool-box">
                 <h3>📊 Lyrics</h3>
-                <button class="btn" onclick="exportAllData('txt')">Export All TXT</button>
-                <button class="btn" onclick="exportAllData('json')">Export JSON</button>
-                <button class="btn" onclick="exportAllData('csv')">Export CSV</button>
-                <button class="btn" onclick="exportAllLyricsWithStyles()">Export + Styles</button>
+                <button class="btn" onclick="exportAllData('txt')">TXT</button>
+                <button class="btn" onclick="exportAllData('json')">JSON</button>
             </div>
-
             <div class="tool-box">
                 <h3>🎨 Styles</h3>
-                <button class="btn" onclick="exportStylesAsTxt()">Export Styles TXT</button>
-                <button class="btn" onclick="exportStylesAsJson()">Export Styles JSON</button>
-            </div>
-
-            <div class="tool-box">
-                <h3>💾 Full Backup</h3>
-                <button class="btn btn-yellow" onclick="backupAllData()">Backup Everything</button>
-                <p style="color: #888; font-size: 0.8em; margin-top: 8px;">Exports all lyrics, styles & briefs</p>
-            </div>
-
-            <div class="tool-box" style="border-color: #ff4444;">
-                <h3 style="color: #ff4444;">🗑️ Danger Zone</h3>
-                <button class="btn btn-red" onclick="clearAllData()">Clear All Data</button>
-                <p style="color: #888; font-size: 0.8em; margin-top: 8px;">Database: <strong id="storageSize">0</strong> items</p>
+                <button class="btn" onclick="exportStylesAsTxt()">Export Styles</button>
             </div>
         </div>
     </div>
-
     <script>
-        console.log('🎶 LyricGenius Loading...');
-        
-        // IndexedDB Setup
-        let db;
-        const DB_NAME = 'LyricGeniusDB';
-        const DB_VERSION = 1;
-        
-        // Global variables
-        let lyrics = [];
-        let briefs = [];
-        let styles = [];
-        let currentLyricId = null;
-        let currentStyleId = null;
-        let isRecording = false;
-        let mediaRecorder = null;
-        let recordingStartTime = 0;
-        let recordingTimer = null;
-        let recognition = null;
-        
-        // Bad words filter - DISABLED (user uses these words)
-        // const badWords = ['damn', 'hell', 'shit', 'fuck', 'bitch', 'ass', 'bastard', 'crap'];
-        const badWords = []; // Empty - no filtering
-        
-        // Initialize IndexedDB
-        function initDB() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, DB_VERSION);
-                
-                request.onerror = () => {
-                    console.error('Database failed');
-                    document.getElementById('dbStatusText').textContent = '❌ Error';
-                    reject(request.error);
-                };
-                
-                request.onsuccess = () => {
-                    db = request.result;
-                    console.log('✅ Database ready');
-                    document.getElementById('dbStatusText').textContent = '✅ Connected';
-                    resolve(db);
-                };
-                
-                request.onupgradeneeded = (event) => {
-                    db = event.target.result;
-                    
-                    if (!db.objectStoreNames.contains('lyrics')) {
-                        const lyricsStore = db.createObjectStore('lyrics', { keyPath: 'id' });
-                        lyricsStore.createIndex('status', 'status', { unique: false });
-                        lyricsStore.createIndex('modified', 'modified', { unique: false });
-                    }
-                    
-                    if (!db.objectStoreNames.contains('briefs')) {
-                        db.createObjectStore('briefs', { keyPath: 'id' });
-                    }
-                    
-                    if (!db.objectStoreNames.contains('styles')) {
-                        db.createObjectStore('styles', { keyPath: 'id' });
-                    }
-                    
-                    console.log('Database initialized');
-                };
-            });
-        }
-        
-        // Database operations
-        function saveToDB(storeName, data) {
-            return new Promise((resolve, reject) => {
-                const transaction = db.transaction([storeName], 'readwrite');
-                const store = transaction.objectStore(storeName);
-                const request = store.put(data);
-                
-                request.onsuccess = () => resolve();
-                request.onerror = () => reject(request.error);
-            });
-        }
-        
-        function getAllFromDB(storeName) {
-            return new Promise((resolve, reject) => {
-                const transaction = db.transaction([storeName], 'readonly');
-                const store = transaction.objectStore(storeName);
-                const request = store.getAll();
-                
-                request.onsuccess = () => resolve(request.result);
-                request.onerror = () => reject(request.error);
-            });
-        }
-        
-        function deleteFromDB(storeName, id) {
-            return new Promise((resolve, reject) => {
-                const transaction = db.transaction([storeName], 'readwrite');
-                const store = transaction.objectStore(storeName);
-                const request = store.delete(id);
-                
-                request.onsuccess = () => resolve();
-                request.onerror = () => reject(request.error);
-            });
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                await initDB();
-                await loadAllData();
-                updateDashboard();
-                displayLibrary();
-                displayStyles();
-                updateStyleSelect();
-            } catch(error) {
-                console.error('Init error:', error);
-                alert('Database error. Data may not save.');
-            }
-        });
-        
-        async function loadAllData() {
-            try {
-                lyrics = await getAllFromDB('lyrics');
-                briefs = await getAllFromDB('briefs');
-                styles = await getAllFromDB('styles');
-                console.log(`Loaded: ${lyrics.length} lyrics, ${styles.length} styles`);
-            } catch(error) {
-                console.error('Load error:', error);
-                lyrics = [];
-                briefs = [];
-                styles = [];
-            }
-        }
-        
-        function showSection(sectionId, event) {
-            if (event) event.preventDefault();
-            
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
-            
-            if (sectionId === 'dashboard') updateDashboard();
-            if (sectionId === 'library') displayLibrary();
-            if (sectionId === 'styles') displayStyles();
-            if (sectionId === 'export') updateStorageSize();
-        }
-        
-        function updateDashboard() {
-            const total = lyrics.length;
-            const unfinished = lyrics.filter(l => l.status === 'in-progress').length;
-            const completed = lyrics.filter(l => l.status === 'complete').length;
-            
-            document.getElementById('totalLyrics').textContent = total;
-            document.getElementById('unfinishedLyrics').textContent = unfinished;
-            document.getElementById('completedLyrics').textContent = completed;
-            document.getElementById('totalStyles').textContent = styles.length;
-        }
-        
-        // BULK IMPORT - AUTO-DETECTS TITLES FROM FILES
-        
-        async function importMultipleFiles(input) {
-            const files = Array.from(input.files);
-            if (files.length === 0) return;
-            
-            if (!confirm(`Import ${files.length} files? This will create ${files.length} new lyrics.`)) return;
-            
-            showProgress();
-            let imported = 0;
-            const total = files.length;
-            
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const text = await file.text();
-                
-                // Auto-detect title: Use filename, or first line, or "Untitled"
-                let title = file.name.replace('.txt', '').replace(/_/g, ' ').trim();
-                
-                // If filename is generic (like "note1.txt"), try to use first line
-                const lines = text.trim().split('\n');
-                const firstLine = lines[0]?.trim();
-                if (firstLine && firstLine.length < 100 && !firstLine.startsWith('[')) {
-                    title = firstLine;
-                }
-                
-                // Remove "---TITLE:" prefix if it exists
-                title = title.replace(/^---TITLE:\s*/i, '').replace(/---$/, '').trim();
-                
-                const lyric = {
-                    id: Date.now().toString() + '_' + i,
-                    title: title || `Untitled ${i + 1}`,
-                    content: text.trim(),
-                    status: 'in-progress',
-                    created: new Date().toISOString(),
-                    modified: new Date().toISOString(),
-                    version: 1
-                };
-                
-                await saveToDB('lyrics', lyric);
-                lyrics.push(lyric);
-                imported++;
-                
-                updateProgress((imported / total) * 100, `Imported ${imported}/${total}`);
-            }
-            
-            hideProgress();
-            await loadAllData();
-            updateDashboard();
-            displayLibrary();
-            alert(`✅ Successfully imported ${imported} lyrics!\n\nTitles auto-detected from filenames.`);
-        }
-        
-        async function importCombinedFile(input) {
-            const file = input.files[0];
-            if (!file) return;
-            
-            const text = await file.text();
-            await parseCombinedText(text);
-        }
-        
-        async function importFromPaste() {
-            const text = document.getElementById('pasteArea').value.trim();
-            if (!text) {
-                alert('⚠️ Paste some lyrics first!');
-                return;
-            }
-            
-            await parseCombinedText(text);
-            document.getElementById('pasteArea').value = '';
-        }
-        
-        async function parseCombinedText(text) {
-            showProgress();
-            
-            // Try to split by ---TITLE: format first
-            let parts = text.split(/---TITLE:\s*/i).filter(p => p.trim());
-            
-            // If no ---TITLE: separators found, try to split by blank lines (Apple Notes style)
-            if (parts.length <= 1) {
-                parts = text.split(/\n\s*\n\s*\n/).filter(p => p.trim());
-            }
-            
-            let imported = 0;
-            
-            for (let i = 0; i < parts.length; i++) {
-                const part = parts[i].trim();
-                if (!part) continue;
-                
-                const lines = part.split('\n');
-                
-                // Auto-detect title from first line or use default
-                let title = lines[0].replace(/---$/, '').trim();
-                let contentStartIndex = 1;
-                
-                // If first line looks like lyrics (starts with [), use it as content
-                if (title.startsWith('[') || title.length > 100) {
-                    title = `Imported Song ${imported + 1}`;
-                    contentStartIndex = 0;
-                }
-                
-                const content = lines.slice(contentStartIndex).join('\n').trim();
-                
-                if (!content) continue;
-                
-                const lyric = {
-                    id: Date.now().toString() + '_' + i,
-                    title: title || `Imported Song ${imported + 1}`,
-                    content: content,
-                    status: 'in-progress',
-                    created: new Date().toISOString(),
-                    modified: new Date().toISOString(),
-                    version: 1
-                };
-                
-                await saveToDB('lyrics', lyric);
-                lyrics.push(lyric);
-                imported++;
-                
-                updateProgress((imported / parts.length) * 100, `Imported ${imported}/${parts.length}`);
-            }
-            
-            hideProgress();
-            await loadAllData();
-            updateDashboard();
-            displayLibrary();
-            alert(`✅ Successfully imported ${imported} lyrics!`);
-        }
-        
-        function showProgress() {
-            document.getElementById('importProgress').style.display = 'block';
-        }
-        
-        function hideProgress() {
-            setTimeout(() => {
-                document.getElementById('importProgress').style.display = 'none';
-                document.getElementById('progressBar').style.width = '0%';
-            }, 1000);
-        }
-        
-        function updateProgress(percent, text) {
-            document.getElementById('progressBar').style.width = percent + '%';
-            document.getElementById('importStatus').textContent = text;
-        }
-        
-        // PASTE FROM CLIPBOARD
-        async function pasteFromClipboard() {
-            try {
-                const text = await navigator.clipboard.readText();
-                if (text) {
-                    document.getElementById('lyricsContent').value = text;
-                    alert('✅ Pasted from clipboard!');
-                } else {
-                    alert('⚠️ Clipboard is empty');
-                }
-            } catch(error) {
-                alert('⚠️ Cannot access clipboard. Try Cmd+V instead.');
-            }
-        }
-        
-        // STYLE FUNCTIONS
-        
-        async function saveNewStyle() {
-            const name = document.getElementById('newStyleName').value.trim();
-            const description = document.getElementById('newStyleDescription').value.trim();
-            
-            if (!name || !description) {
-                alert('⚠️ Fill in name and description!');
-                return;
-            }
-            
-            const style = {
-                id: Date.now().toString(),
-                name: name,
-                description: description,
-                created: new Date().toISOString()
-            };
-            
-            await saveToDB('styles', style);
-            styles.push(style);
-            displayStyles();
-            updateStyleSelect();
-            updateDashboard();
-            clearStyleForm();
-            alert('✅ Style saved!');
-        }
-        
-        function clearStyleForm() {
-            document.getElementById('newStyleName').value = '';
-            document.getElementById('newStyleDescription').value = '';
-        }
-        
-        function displayStyles() {
-            const container = document.getElementById('stylesList');
-            document.getElementById('styleCount').textContent = styles.length;
-            
-            if (styles.length === 0) {
-                container.innerHTML = '<p style="color: #888; padding: 20px; text-align: center;">No styles yet</p>';
-                return;
-            }
-            
-            container.innerHTML = styles.map(style => `
-                <div class="style-item">
-                    <div style="flex: 1;">
-                        <div class="style-name">${style.name}</div>
-                        <div class="style-desc">${style.description}</div>
-                    </div>
-                    <div>
-                        <button class="btn btn-small" onclick="useStyle('${style.id}')">Use</button>
-                        <button class="btn btn-red btn-small" onclick="deleteStyle('${style.id}')">×</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function updateStyleSelect() {
-            const select = document.getElementById('styleSelect');
-            select.innerHTML = '<option value="">No Style</option>' + 
-                styles.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
-        }
-        
-        function useStyle(styleId) {
-            document.getElementById('styleSelect').value = styleId;
-            applyStyleToEditor();
-            showSection('editor', { target: document.querySelector('.nav-link'), preventDefault: () => {} });
-        }
-        
-        function applyStyleToEditor() {
-            const styleId = document.getElementById('styleSelect').value;
-            const display = document.getElementById('currentStyleDisplay');
-            
-            if (!styleId) {
-                display.innerHTML = '';
-                currentStyleId = null;
-                return;
-            }
-            
-            const style = styles.find(s => s.id === styleId);
-            if (style) {
-                currentStyleId = styleId;
-                display.innerHTML = `
-                    <div class="current-style">
-                        <strong>✨ ${style.name}</strong><br>
-                        <div style="margin-top: 5px; font-size: 0.85em;">${style.description}</div>
-                    </div>
-                `;
-            }
-        }
-        
-        async function deleteStyle(styleId) {
-            if (!confirm('Delete this style?')) return;
-            
-            await deleteFromDB('styles', styleId);
-            styles = styles.filter(s => s.id !== styleId);
-            displayStyles();
-            updateStyleSelect();
-            updateDashboard();
-        }
-        
-        // LYRIC FUNCTIONS
-        
-        function newLyric() {
-            currentLyricId = null;
-            currentStyleId = null;
-            document.getElementById('song
+let db,lyrics=[],styles=[],currentLyricId=null,currentStyleId=null;const DB_NAME='LyricGeniusDB',DB_VERSION=1;
+function initDB(){return new Promise((resolve,reject)=>{const request=indexedDB.open(DB_NAME,DB_VERSION);request.onerror=()=>{document.getElementById('dbStatusText').textContent='❌ Error';reject(request.error);};request.onsuccess=()=>{db=request.result;document.getElementById('dbStatusText').textContent='✅ Connected';resolve(db);};request.onupgradeneeded=(event)=>{db=event.target.result;if(!db.objectStoreNames.contains('lyrics')){const s=db.createObjectStore('lyrics',{keyPath:'id'});s.createIndex('status','status',{unique:false});s.createIndex('modified','modified',{unique:false});}if(!db.objectStoreNames.contains('styles'))db.createObjectStore('styles',{keyPath:'id'});};});}
+function saveToDB(storeName,data){return new Promise((resolve,reject)=>{const t=db.transaction([storeName],'readwrite');const s=t.objectStore(storeName);const r=s.put(data);r.onsuccess=()=>resolve();r.onerror=()=>reject(r.error);});}
+function getAllFromDB(storeName){return new Promise((resolve,reject)=>{const t=db.transaction([storeName],'readonly');const s=t.objectStore(storeName);const r=s.getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+function deleteFromDB(storeName,id){return new Promise((resolve,reject)=>{const t=db.transaction([storeName],'readwrite');const s=t.objectStore(storeName);const r=s.delete(id);r.onsuccess=()=>resolve();r.onerror=()=>reject(r.error);});}
+document.addEventListener('DOMContentLoaded',async function(){try{await initDB();await loadAllData();updateDashboard();displayLibrary();displayStyles();updateStyleSelect();}catch(error){alert('Database error');}});
+async function loadAllData(){try{lyrics=await getAllFromDB('lyrics');styles=await getAllFromDB('styles');}catch(error){lyrics=[];styles=[];}}
+function showSection(sectionId,event){if(event)event.preventDefault();document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));document.getElementById(sectionId).classList.add('active');if(event&&event.target)event.target.classList.add('active');if(sectionId==='dashboard')updateDashboard();if(sectionId==='library')displayLibrary();if(sectionId==='styles')displayStyles();}
+function updateDashboard(){const total=lyrics.length;const unfinished=lyrics.filter(l=>l.status==='in-progress').length;const completed=lyrics.filter(l=>l.status==='complete').length;document.getElementById('totalLyrics').textContent=total;document.getElementById('unfinishedLyrics').textContent=unfinished;document.getElementById('completedLyrics').textContent=completed;document.getElementById('totalStyles').textContent=styles.length;}
+async function saveNewStyle(){const name=document.getElementById('newStyleName').value.trim();const description=document.getElementById('newStyleDescription').value.trim();if(!name||!description){alert('⚠️ Fill in name and description!');return;}const style={id:Date.now().toString(),name:name,description:description,created:new Date().toISOString()};await saveToDB('styles',style);styles.push(style);displayStyles();updateStyleSelect();updateDashboard();document.getElementById('newStyleName').value='';document.getElementById('newStyleDescription').value='';alert('✅ Style saved!');}
+function displayStyles(){const container=document.getElementById('stylesList');document.getElementById('styleCount').textContent=styles.length;if(styles.length===0){container.innerHTML='<p style="color:#888;padding:20px;text-align:center;">No styles yet</p>';return;}container.innerHTML=styles.map(style=>`<div class="style-item"><div style="flex:1;"><div class="style-name">${style.name}</div><div class="style-desc">${style.description}</div></div><div><button class="btn btn-small" onclick="useStyle('${style.id}')">Use</button><button class="btn btn-red btn-small" onclick="deleteStyle('${style.id}')">×</button></div></div>`).join('');}
+function updateStyleSelect(){const select=document.getElementById('styleSelect');select.innerHTML='<option value="">No Style</option>'+styles.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');}
+function useStyle(styleId){document.getElementById('styleSelect').value=styleId;applyStyleToEditor();showSection('editor',{target:document.querySelector('.nav-link'),preventDefault:()=>{}});}
+function applyStyleToEditor(){const styleId=document.getElementById('styleSelect').value;const display=document.getElementById('currentStyleDisplay');if(!styleId){display.innerHTML='';currentStyleId=null;return;}const style=styles.find(s=>s.id===styleId);if(style){currentStyleId=styleId;display.innerHTML=`<div class="current-style"><strong>✨ ${style.name}</strong><br><div style="margin-top:5px;font-size:0.85em;">${style.description}</div></div>`;}}
+async function deleteStyle(styleId){if(!confirm('Delete this style?'))return;await deleteFromDB('styles',styleId);styles=styles.filter(s=>s.id!==styleId);displayStyles();updateStyleSelect();updateDashboard();}
+function newLyric(){currentLyricId=null;currentStyleId=null;document.getElementById('songTitle').value='';document.getElementById('songArtist').value='';document.getElementById('songProducer').value='';document.getElementById('songGenre').value='';document.getElementById('songMood').value='';document.getElementById('songBPM').value='';document.getElementById('lyricsContent').value='';document.getElementById('styleSelect').value='';document.getElementById('currentStyleDisplay').innerHTML='';}
+async function saveLyrics(status){const title=document.getElementById('songTitle').value.trim();if(!title){alert('⚠️ Enter a title!');return;}const lyric={id:currentLyricId||Date.now().toString(),title:title,artist:document.getElementById('songArtist').value.trim(),producer:document.getElementById('songProducer').value.trim(),genre:document.getElementById('songGenre').value,mood:document.getElementById('songMood').value.trim(),bpm:document.getElementById('songBPM').value,content:document.getElementById('lyricsContent').value.trim(),styleId:currentStyleId,styleName:currentStyleId?styles.find(s=>s.id===currentStyleId)?.name:null,styleDescription:currentStyleId?styles.find(s=>s.id===currentStyleId)?.description:null,status:status,created:currentLyricId?lyrics.find(l=>l.id===currentLyricId)?.created||new Date().toISOString():new Date().toISOString(),modified:new Date().toISOString(),version:1};try{if(currentLyricId){const existing=lyrics.find(l=>l.id===currentLyricId);if(existing){lyric.created=existing.created;lyric.version=(existing.version||1);const index=lyrics.findIndex(l=>l.id===currentLyricId);lyrics[index]=lyric;}}else{lyrics.push(lyric);currentLyricId=lyric.id;}await saveToDB('lyrics',lyric);updateDashboard();displayLibrary();alert('✅ Saved!');}catch(error){alert('Error: '+error.message);}}
+function displayLibrary(){const container=document.getElementById('lyricsList');if(lyrics.length===0){container.innerHTML='<p style="color:#888;padding:40px;text-align:center;">No lyrics yet</p>';return;}container.innerHTML=lyrics.map(lyric=>{const statusColor=lyric.status==='complete'?'#4caf50':'#ff9800';const styleDisplay=lyric.styleName?`<br>🎨 ${lyric.styleName}`:'';return`<div class="item"><div class="item-title">${lyric.title}</div><div class="item-meta">${lyric.artist?'🎤 '+lyric.artist+' | ':''}${lyric.producer?'🎧 '+lyric.producer+' | ':''}${lyric.genre?'🎵 '+lyric.genre+' | ':''}📅 ${new Date(lyric.modified).toLocaleDateString()}${styleDisplay}</div><button class="btn btn-small" onclick="editLyric('${lyric.id}')">✏️ Edit</button><button class="btn btn-small" onclick="downloadLyric('${lyric.id}')">📄 DL</button><button class="btn btn-red btn-small" onclick="deleteLyric('${lyric.id}')">🗑️</button></div>`;}).join('');}
+function editLyric(id){const lyric=lyrics.find(l=>l.id===id);if(!lyric)return;currentLyricId=id;document.getElementById('songTitle').value=lyric.title||'';document.getElementById('songArtist').value=lyric.artist||'';document.getElementById('songProducer').value=lyric.producer||'';document.getElementById('songGenre').value=lyric.genre||'';document.getElementById('songMood').value=lyric.mood||'';document.getElementById('songBPM').value=lyric.bpm||'';document.getElementById('lyricsContent').value=lyric.content||'';if(lyric.styleId){document.getElementById('styleSelect').value=lyric.styleId;currentStyleId=lyric.styleId;applyStyleToEditor();}else{document.getElementById('styleSelect').value='';currentStyleId=null;document.getElementById('currentStyleDisplay').innerHTML='';}showSection('editor',{target:document.querySelector('.nav-link'),preventDefault:()=>{}});}
+async function deleteLyric(id){if(!confirm('Delete?'))return;await deleteFromDB('lyrics',id);lyrics=lyrics.filter(l=>l.id!==id);displayLibrary();updateDashboard();if(currentLyricId===id)newLyric();}
+function downloadLyric(id){const lyric=lyrics.find(l=>l.id===id);if(!lyric)return;let content=`${lyric.title}\n${'='.repeat(lyric.title.length)}\n\n`;if(lyric.styleName){const style=styles.find(s=>s.id===lyric.styleId);if(style)content+=`STYLE: ${style.name}\n${style.description}\n\n`;}content+=lyric.content;const blob=new Blob([content],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`${lyric.title.replace(/[^a-z0-9]/gi,'_')}.txt`;a.click();URL.revokeObjectURL(url);}
+function applyFilters(){const titleFilter=document.getElementById('searchTitle').value.toLowerCase();const statusFilter=document.getElementById('statusFilter').value;const filtered=lyrics.filter(lyric=>{const matchesTitle=!titleFilter||lyric.title.toLowerCase().includes(titleFilter);const matchesStatus=!statusFilter||lyric.status===statusFilter;return matchesTitle&&matchesStatus;});const originalLyrics=lyrics;lyrics=filtered;displayLibrary();lyrics=originalLyrics;}
+async function importMultipleFiles(input){const files=Array.from(input.files);if(files.length===0)return;if(!confirm(`Import ${files.length} files?`))return;showProgress();let imported=0;const total=files.length;for(let i=0;i<files.length;i++){const file=files[i];const text=await file.text();let title=file.name.replace('.txt','').replace(/_/g,' ').trim();const lines=text.trim().split('\n');const firstLine=lines[0]?.trim();if(firstLine&&firstLine.length<100&&!firstLine.startsWith('[')){title=firstLine;}title=title.replace(/^---TITLE:\s*/i,'').replace(/---$/,'').trim();const lyric={id:Date.now().toString()+'_'+i,title:title||`Untitled ${i+1}`,content:text.trim(),status:'in-progress',created:new Date().toISOString(),modified:new Date().toISOString(),version:1};await saveToDB('lyrics',lyric);lyrics.push(lyric);imported++;updateProgress((imported/total)*100,`Imported ${imported}/${total}`);}hideProgress();await loadAllData();updateDashboard();displayLibrary();alert(`✅ Imported ${imported} lyrics!`);}
+async function importFromPaste(){const text=document.getElementById('pasteArea').value.trim();if(!text){alert('⚠️ Paste lyrics first!');return;}await parseCombinedText(text);document.getElementById('pasteArea').value='';}
+async function parseCombinedText(text){showProgress();let parts=text.split(/---TITLE:\s*/i).filter(p=>p.trim());if(parts.length<=1){parts=text.split(/\n\s*\n\s*\n/).filter(p=>p.trim());}let imported=0;for(let i=0;i<parts.length;i++){const part=parts[i].trim();if(!part)continue;const lines=part.split('\n');let title=lines[0].replace(/---$/,'').trim();let contentStartIndex=1;if(title.startsWith('[')||title.length>100){title=`Imported ${imported+1}`;contentStartIndex=0;}const content=lines.slice(contentStartIndex).join('\n').trim();if(!content)continue;const lyric={id:Date.now().toString()+'_'+i,title:title||`Imported ${imported+1}`,content:content,status:'in-progress',created:new Date().toISOString(),modified:new Date().toISOString(),version:1};await saveToDB('lyrics',lyric);lyrics.push(lyric);imported++;updateProgress((imported/parts.length)*100,`Imported ${imported}/${parts.length}`);}hideProgress();await loadAllData();updateDashboard();displayLibrary();alert(`✅ Imported ${imported} lyrics!`);}
+function showProgress(){document.getElementById('importProgress').style.display='block';}
+function hideProgress(){setTimeout(()=>{document.getElementById('importProgress').style.display='none';document.getElementById('progressBar').style.width='0%';},1000);}
+function updateProgress(percent,text){document.getElementById('progressBar').style.width=percent+'%';document.getElementById('importStatus').textContent=text;}
+function copyToClipboard(){const content=document.getElementById('lyricsContent').value;if(!content){alert('⚠️ No lyrics!');return;}navigator.clipboard.writeText(content).then(()=>{alert('✅ Copied!');});}
+function exportAllData(format){if(lyrics.length===0){alert('⚠️ No lyrics!');return;}let content,filename,mimeType;if(format==='txt'){content=lyrics.map(l=>`${l.title}\n${'='.repeat(l.title.length)}\n\n${l.content}\n\n${'─'.repeat(50)}\n\n`).join('');filename=`lyrics_${new Date().toISOString().split('T')[0]}.txt`;mimeType='text/plain';}else if(format==='json'){content=JSON.stringify(lyrics,null,2);filename=`lyrics_${new Date().toISOString().split('T')[0]}.json`;mimeType='application/json';}const blob=new Blob([content],{type:mimeType});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);}
+function exportStylesAsTxt(){if(styles.length===0){alert('⚠️ No styles!');return;}let content='LYRICGENIUS STYLES\n'+'='.repeat(50)+'\n\n';styles.forEach((style,i)=>{content+=`${i+1}. ${style.name}\n${style.description}\n\n`;});const blob=new Blob([content],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`styles_${new Date().toISOString().split('T')[0]}.txt`;a.click();URL.revokeObjectURL(url);}
+async function findRhymes(){const word=document.getElementById('rhymeInput').value.trim();if(!word)return;try{const response=await fetch(`https://api.datamuse.com/words?rel_rhy=${word}&max=30`);const data=await response.json();displayWordResults(data);}catch(e){alert('Error fetching rhymes');}}
+async function findSynonyms(){const word=document.getElementById('rhymeInput').value.trim();if(!word)return;try{const response=await fetch(`https://api.datamuse.com/words?ml=${word}&max=30`);const data=await response.json();displayWordResults(data);}catch(e){alert('Error fetching synonyms');}}
+function displayWordResults(results){const container=document.getElementById('rhymeResults');if(results.length===0){container.innerHTML='<p style="color:#888;">No results</p>';return;}container.innerHTML=results.map(item=>`<span class="rhyme-word" onclick="insertWord('${item.word}')">${item.word}</span>`).join('');}
+function insertWord(word){const textarea=document.getElementById('lyricsContent');const pos=textarea.selectionStart;const text=textarea.value;textarea.value=text.substring(0,pos)+word+text.substring(pos);textarea.focus();textarea.setSelectionRange(pos+word.length,pos+word.length);}
+    </script>
+</body>
+</html>
